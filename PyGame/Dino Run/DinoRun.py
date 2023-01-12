@@ -217,7 +217,6 @@ def game():
     replay_button = pygame.image.load("sprites/replay_button.png")
     logo = pygame.image.load("sprites/logo.png")
     GREY = (240, 240, 240)
-    WHITE = (255, 255, 255)
 
     ground = Ground()
     dino = Dino()
@@ -231,7 +230,6 @@ def game():
     play_game = True
     dead = False
     high_score_value = 0
-    checkpoint = 0
     FPS = 85
 
     while play_game:
@@ -248,7 +246,7 @@ def game():
                 pygame.quit()
                 play_game = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE or event.key == pygame.K_UP:
                     running = True
                     ground = Ground()
                     dino = Dino()
@@ -274,12 +272,12 @@ def game():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                 elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
+                    if event.key == pygame.K_SPACE or event.key == pygame.K_UP:
                         dino.jump()
-                    elif event.key == pygame.K_LSHIFT:
+                    elif event.key == pygame.K_LSHIFT or event.key == pygame.K_DOWN:
                         dino.is_ducking = True
                 elif event.type == pygame.KEYUP:
-                    if event.key == pygame.K_LSHIFT:
+                    if event.key == pygame.K_LSHIFT or event.key == pygame.K_DOWN:
                         dino.is_ducking = False
 
             ground.update()
