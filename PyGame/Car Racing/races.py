@@ -1,5 +1,6 @@
 import pygame, sys, time, random
 from pygame.locals import *
+from races_dodge import *
 
 pygame.init()
 
@@ -33,3 +34,35 @@ Previous_Score = DodgeCars(Display)
 Previous_Score.Previous_Score()
 
 EndGame = False
+GamePaused = False
+Just_In = DodgeCars(Display)
+
+def Entry_Screen():
+    Entry = True
+    Display.fill(white)
+    
+    while Entry:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+        
+        Color_Tuple = (red, yellow, green)
+        Color = Color_Tuple(random.randint(0,2))
+        
+        display_message("Dodge Car", 70, 400, 100, Color)
+        display_message("Made By: Ricardo Y. Rodriguez Gonzalez", 20, 650, 20, black)
+        
+        Just_In.Blit_Image(Bugatti, 175, 200)
+        
+        Interactive(250, 450, 20, green, l_green, "Start!")
+        Interactive(400, 450, 20, yellow, l_yellow, "Ready!")
+        Interactive(550, 450, 20, red, l_red, "Quit!")
+
+def display_message(text, size, x, y, color):
+    TextObj = pygame.font.Font("resources/font.ttf")
+    TextSurf = TextObj.render(text, True, color)
+    RectSurf = TextSurf.get_rect()
+    RectSurf.center = (x, y)
+    Display.blit(TextSurf, RectSurf)
+    pygame.display.update()
